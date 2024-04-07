@@ -38,8 +38,8 @@ dynamic editProfile (String newName, String newGrade, String uid) async {
 
 dynamic submitTutorRequest(String submitterUID, String submitterName, List availability, String subject, String description, String groupID, String userEmail) async {
   try {
-    await FirebaseFirestore.instance.collection("groups").doc(groupID).collection("tutor_requests").doc().set({"submitterID": submitterUID, "submitterName": submitterName, "submitterAvailability": availability, "subject": subject, "description": description, "submitterEmail" : userEmail, "pending": "true"});
-    await FirebaseFirestore.instance.collection("groups").doc(submitterUID).collection("pending_requests").doc().set({"submitterID": submitterUID, "submitterName": submitterName, "submitterAvailability": availability, "subject": subject, "description": description, "submitterEmail" : userEmail, "pending": "true"});
+    DocumentReference groupSessionReference = await FirebaseFirestore.instance.collection("groups").doc(groupID).collection("tutor_requests").add({"submitterID": submitterUID, "submitterName": submitterName, "submitterAvailability": availability, "subject": subject, "description": description, "submitterEmail" : userEmail, "pending": "true", "groupID": groupID});
+    await FirebaseFirestore.instance.collection("users").doc(submitterUID).collection("pending_requests").doc().set({"submitterID": submitterUID, "submitterName": submitterName, "submitterAvailability": availability, "subject": subject, "description": description, "submitterEmail" : userEmail, "pending": "true", "groupID": groupID, "groupSessionReference": groupSessionReference.id});
   } catch(e) {
     return "Unable to process request"; 
   }
