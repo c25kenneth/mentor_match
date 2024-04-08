@@ -20,7 +20,7 @@ class _StudentHomeLoadedState extends State<StudentHomeLoaded> {
       key: _key,
       
       appBar: AppBar(
-        title: Text("Welcome"),
+        title: Text("Your Groups"),
           leading: IconButton(
             icon: Icon(Icons.menu),
             onPressed: () {

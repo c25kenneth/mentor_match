@@ -23,15 +23,15 @@ class _AllTutoringSessionsState extends State<AllTutoringSessions> {
             body: Column(
               children: [
                 SafeArea(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(9, 0, 0, 0),
-                                margin: EdgeInsets.fromLTRB(15, 0, 0, 0), 
-                                child: TopBarFb1(title: "All Sessions",)
-                              ),
-                            ),
-                          ),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(9, 0, 0, 0),
+                      margin: EdgeInsets.fromLTRB(15, 0, 0, 0), 
+                      child: TopBarFb1(title: "All Sessions",)
+                    ),
+                  ),
+                ),
               ],
             ),
           );

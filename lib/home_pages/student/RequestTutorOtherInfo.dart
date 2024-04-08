@@ -122,9 +122,9 @@ class _RequestTutorOtherInfoState extends State<RequestTutorOtherInfo> {
                           SizedBox(height: 20),
                           GradientButton2Fb1(text: "Submit Request", onPressed: () async {
                             print(_controllerAvailability.selectedOptions.map((element) {return element.value;}).toList());
-                            if (_controllerAvailability.selectedOptions.isEmpty || _controllerSubject.selectedOptions.isEmpty) {
+                            if (_controllerAvailability.selectedOptions.isEmpty || _controllerSubject.selectedOptions.isEmpty || _extraInfoController.text == "") {
                               setState(() {
-                                errorText = "Must choose subject and availability!";
+                                errorText = "One or more fields are empty!";
                               });
                             } else {
                               dynamic response = await submitTutorRequest(_auth.currentUser!.uid, innerSnapshot.data!["name"], _controllerAvailability.selectedOptions.map((element) {return element.value;}).toList(), _controllerSubject.selectedOptions[0].value, _extraInfoController.text, widget.groupID, _auth.currentUser!.email.toString());
