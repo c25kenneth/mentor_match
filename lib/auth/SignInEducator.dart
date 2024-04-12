@@ -149,7 +149,7 @@ class _SignInEducatorState extends State<SignInEducator> {
                           if (email != "" && password != "") {
                             dynamic uid = await signInStudent(email, password);
 
-                            if (uid.runtimeType == String) {
+                            if (uid.runtimeType != String) {
                               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeBase(uid: uid)), (Route<dynamic> route) => false); 
                             } else {
                               print(uid.toString()); 

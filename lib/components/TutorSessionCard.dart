@@ -75,11 +75,12 @@ class _TutorSessionCardState extends State<TutorSessionCard> {
               child: Row(
                 children: [
                   Icon(Icons.schedule_outlined, color: Colors.white,),
-                  SizedBox(width: 15),
+                  SizedBox(width: 10,),
                   Text("Pending approval", style: TextStyle(color: Colors.white),),
 
-                  SizedBox(width: 32),
+                  SizedBox(width: 24),
                   Icon(Icons.calendar_month_outlined, color: Colors.white,),
+                  SizedBox(width: 10),
                   Expanded(child: Text(dateString.substring(0, dateString.length - 2), style: TextStyle(color: Colors.white), maxLines: 1, overflow: TextOverflow.ellipsis,))
                 ],
               ),

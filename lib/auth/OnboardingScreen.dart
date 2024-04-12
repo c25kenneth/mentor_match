@@ -103,7 +103,7 @@ class _OnBoardingState extends State<OnBoarding> {
               SizedBox(height: 30),
                       GradientButtonFb1(text: "Create Account", onPressed: () async {
                         if (_nameController.text != "") {
-                          dynamic res = addStudentInfo(widget.userCred.user!.uid, currentSelectedValue, widget.userCred.additionalUserInfo?.profile?["email"], _nameController.text); 
+                          dynamic res = addStudentInfo(widget.userCred.user!.uid, currentSelectedValue, FirebaseAuth.instance.currentUser!.email!, _nameController.text); 
                           if (res.runtimeType == String) {
                             setState(() {
                               errorMessage = res; 
