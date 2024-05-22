@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mentor_match/auth/CreateAccountStudent.dart';
-import 'package:mentor_match/auth/Welcome.dart';
+import 'package:mentor_match/LoadingScreen.dart';
 import 'package:mentor_match/components/GradientButton.dart';
 import 'package:mentor_match/home_pages/student/JoinGroup.dart';
 import 'package:mentor_match/home_pages/student/StudentHomeBase.dart';
@@ -25,7 +23,7 @@ class _StudentHomeState extends State<StudentHome> {
 
     return StreamBuilder(stream: FirebaseFirestore.instance.collection("users").doc(widget.uid).snapshots(), builder: ((context, snapshot) {
       if (snapshot.hasData) {
-        if (snapshot.data!['groups'].length == 0) {
+        if (snapshot.data!["groupID"] == "") {
           return Scaffold(
             body: Center(
                 child: Column(
@@ -41,8 +39,6 @@ class _StudentHomeState extends State<StudentHome> {
                     SizedBox(height: 30), 
                     GradientButtonFb1(text: "Join Group", onPressed: () async {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => JoinGroup(uid: widget.uid,)));
-                      // await FirebaseAuth.instance.signOut(); 
-                      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Welcome()));
                     })
                   ],
                 ),
@@ -50,48 +46,10 @@ class _StudentHomeState extends State<StudentHome> {
               ),
           );
         } else {
-          // final List userGroups = [];
-          // snapshot.data!['groups'].forEach((item) async {
-          //   userGroups.add(await FirebaseFirestore.instance.collection("groups").doc(item).get());
-          // });
-          // return StudentHomeLoaded(items: userGroups);
-          Future<List<DocumentSnapshot>> getData() async {
-            List<DocumentSnapshot> userGroups = [];
-            QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection("groups").get();
-            for (DocumentSnapshot item in querySnapshot.docs) {
-              if (snapshot.data!['groups'].contains(item.id)) {
-                userGroups.add(item);
-              }
-            }
-            return userGroups;
-          }
-          return FutureBuilder(
-            future: getData(),
-            builder: (context, AsyncSnapshot<List<DocumentSnapshot>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                // Show loading screen while data is being fetched
-                return Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              } else { 
-                  // Data has been fetched, show desired screen
-                  return StudentHomeLoaded();
-              }
-            },
-          );
+          return StudentHomeLoaded();
         }
       } else {
-        return const Scaffold(
-          body: const Center(
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [const CircularProgressIndicator()],
-            ),
-          ),
-        );
+        return LoadingScreen();
       }
     }));
   }

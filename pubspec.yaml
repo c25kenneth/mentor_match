@@ -80,6 +80,7 @@ flutter:
     - assets/images/undraw_profile_re_4a55.svg
     - assets/images/undraw_sign_in_re_o58h.svg
     - assets/images/undraw_undraw_sign_up_ln1s_-1-_ofs1.svg
+    - assets/images/undraw_not_found_re_bh2e.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

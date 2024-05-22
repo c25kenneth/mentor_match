@@ -1,16 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mentor_match/components/NavigationBarItem.dart';
 import 'package:mentor_match/home_pages/student/AllTutoringSessions.dart';
-import 'package:mentor_match/home_pages/student/HomeAllGroups.dart';
-import 'package:mentor_match/home_pages/student/JoinAnotherGroup.dart';
-import 'package:mentor_match/home_pages/student/JoinGroup.dart';
-import 'package:mentor_match/home_pages/student/PendingSessions.dart';
-import 'package:mentor_match/home_pages/student/RequestTutor.dart';
 import 'package:mentor_match/home_pages/student/StudentHomeBase.dart';
-import 'package:mentor_match/home_pages/student/StudentProfile.dart';
-import 'package:mentor_match/home_pages/student/student_home.dart';
 
 class NavDrawer extends StatefulWidget {
   final String currentPage; 

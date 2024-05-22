@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mentor_match/FirestoreOperations.dart';
 import 'package:mentor_match/auth/CreateAccountStudent.dart';
 import 'package:mentor_match/auth/OnboardingScreen.dart';
-import 'package:mentor_match/auth/SignInEducator.dart';
 import 'package:mentor_match/auth/SignInWithGoogle.dart';
 import 'package:mentor_match/auth/auth.dart';
 import 'package:mentor_match/home_pages/Home_base.dart';
@@ -33,24 +30,21 @@ class _SignInStudentState extends State<SignInStudent> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("Welcome back", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                  Text("Sign in to your account", style: TextStyle(fontSize: 16, color: Colors.grey[600]),),
-                  SizedBox(height: 25),
-                  Container(width: screenWidth * 0.4, height: screenHeight * 0.2, child: SvgPicture.asset("assets/images/undraw_sign_in_re_o58h.svg", )), 
-                  SizedBox(height: 15),
-                  Center(
-                    child: Column(
-          
-                    children: [
+        body: Center(
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.all(screenWidth * 0.075),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Welcome back", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
+                    Text("Please sign in to continue", style: TextStyle(fontSize: 18, color: Colors.grey[600]),),
+                    Column(
+                      children: [
+                        SizedBox(height: 25),
                         Container(
-                          width: screenWidth * 0.8,
+                          // width: screenWidth * 0.8,
                           child: TextField(
                             onChanged: (val) {
                               _textEditingControllerEmail.text = val; 
@@ -74,7 +68,7 @@ class _SignInStudentState extends State<SignInStudent> {
                         ),
                         SizedBox(height: 25),
                         Container(
-                          width: screenWidth * 0.8,
+                          // width: screenWidth * 0.8,
                           child: TextField(
                             onChanged: (value) {
                               _textEditingControllerPassword.text = value; 
@@ -112,7 +106,7 @@ class _SignInStudentState extends State<SignInStudent> {
                         errorMessage == "" ? Container() : Text(errorMessage, style: TextStyle(color: Colors.red, fontWeight: FontWeight.w400, fontSize: 15),),
                         SizedBox(height: 30),
                         Container(
-                          width: screenWidth * 0.8,
+                          // width: screenWidth * 0.8,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(30),
@@ -155,11 +149,11 @@ class _SignInStudentState extends State<SignInStudent> {
                           ),
                         ),
                         Column(
-                    children: [
-                       Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 25),
-                    child: Row(
-                      children: [
+                                        children: [
+                                           Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 25),
+                                        child: Row(
+                                          children: [
                         Expanded(
                           child: Divider(
                             thickness: 0.5,
@@ -179,52 +173,52 @@ class _SignInStudentState extends State<SignInStudent> {
                             color: Colors.grey[400],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: screenWidth * 0.8, child: GoogleBtn1(onPressed: () async {
-                    dynamic result = await signInWithGoogle();
-                    print(result);
-                    if (result.runtimeType == String) {
-                      setState(() {
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        child: GoogleBtn1(onPressed: () async {
+                                        dynamic result = await signInWithGoogle();
+                                        print(result);
+                                        if (result.runtimeType == String) {
+                                          setState(() {
                         errorMessage = result; 
-                      });
-                    } else {
-                      dynamic doesUserExist = await doesProfileExist(result.user.uid);
-                      
-                      if (doesUserExist.runtimeType == bool && doesUserExist == false) {
+                                          });
+                                        } else {
+                                          dynamic doesUserExist = await doesProfileExist(result.user.uid);
+                                          
+                                          if (doesUserExist.runtimeType == bool && doesUserExist == false) {
                         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => OnBoarding(userCred: result)), (Route<dynamic> route) => false);
-                      } else if (doesUserExist.runtimeType == bool && doesUserExist == true){
+                                          } else if (doesUserExist.runtimeType == bool && doesUserExist == true){
                         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeBase(uid: result.user.uid)), (Route<dynamic> route) => false);
-                      } else if (doesUserExist.runtimeType == String) {
+                                          } else if (doesUserExist.runtimeType == String) {
                         setState(() {
                           errorMessage = doesUserExist; 
                         });
-                      }
-                    }
-                  })),
-                  SizedBox(height: 15),
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
+                                          }
+                                        }
+                                      })),
+                                      SizedBox(height: 15),
+                                      RichText(
+                                        text: TextSpan(children: [
+                                          TextSpan(
                         text: "Don't have an account? ",
                         style: TextStyle(color: Colors.grey, fontSize: 15),
-                      ),
-                      TextSpan(
+                                          ),
+                                          TextSpan(
                           text: 'Register',
                           style: TextStyle(color: Colors.blue, fontSize: 15),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignUpStudent()));
                             }),
-                    ]),
-                  ),
+                                        ]),
+                                      ),
                                 ],),
-                    ],
-                                    ),
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

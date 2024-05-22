@@ -17,8 +17,8 @@ class _HomeAllGroupsState extends State<HomeAllGroups> {
   @override
   void initState() {
     // Only create the stream once
-    _stream = FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).collection("groups").snapshots();
     super.initState();
+    _stream = FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).collection("groups").snapshots();
   }
 
   @override

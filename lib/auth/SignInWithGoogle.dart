@@ -38,7 +38,7 @@ required this.onPressed,
               const SizedBox(
                 width: 10,
               ),
-              const Text("Google",
+              const Text("Continue with Google",
                   style: TextStyle(color: Colors.black, fontSize: 16)),
             ],
           ),

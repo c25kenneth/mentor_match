@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,6 +24,12 @@ class _SignInEducatorState extends State<SignInEducator> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
+          title: Text(
+            'Educator Sign In',
+             style: TextStyle(
+              fontWeight: FontWeight.bold,
+             ),
+          ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -40,20 +47,7 @@ class _SignInEducatorState extends State<SignInEducator> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(
-                            screenWidth * 0.8, 20, screenWidth * 0.8, 0),
-                        child: Text(
-                          'Educator Sign In',
-                          style: TextStyle(
-                            fontSize: 85,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
+            
                     SizedBox(height: 35),
                     Center(
                         child: SvgPicture.asset(
@@ -147,12 +141,12 @@ class _SignInEducatorState extends State<SignInEducator> {
                         onPressed: () async {
 
                           if (email != "" && password != "") {
-                            dynamic uid = await signInStudent(email, password);
+                            dynamic userCred = await signInStudent(email, password);
 
-                            if (uid.runtimeType != String) {
-                              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeBase(uid: uid)), (Route<dynamic> route) => false); 
+                            if (userCred.runtimeType != String) {
+                              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeBase(uid: userCred.user!.uid)), (Route<dynamic> route) => false); 
                             } else {
-                              print(uid.toString()); 
+                              print(userCred.toString()); 
                             }
                           } else {
                             setState(() {

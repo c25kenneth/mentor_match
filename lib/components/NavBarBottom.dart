@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_match/auth/Welcome.dart';
-import 'package:mentor_match/home_pages/student/AllTutoringSessions.dart';
-import 'package:mentor_match/home_pages/student/JoinAnotherGroup.dart';
-import 'package:mentor_match/home_pages/student/JoinGroup.dart';
 import 'package:mentor_match/home_pages/student/PendingSessions.dart';
 import 'package:mentor_match/home_pages/student/RequestTutor.dart';
-import 'package:mentor_match/home_pages/student/StudentHomeBase.dart';
+import 'package:mentor_match/home_pages/student/RequestTutorOtherInfo.dart';
 import 'package:mentor_match/home_pages/student/StudentProfile.dart';
 
 class DrawerFb1 extends StatelessWidget {
-  const DrawerFb1({super.key});
+  final String groupID; 
+  final String name; 
+  final String grade; 
+  const DrawerFb1({super.key, required this.groupID, required this.name, required this.grade});
 
   @override
   Widget build(BuildContext context) {
@@ -24,30 +24,28 @@ class DrawerFb1 extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 12),
-                  
+
+                    ListTile(
+                      title: Text(name, style: TextStyle(color: Colors.white, fontSize: 18),),
+                      subtitle: Text("Grade: " + grade,  style: TextStyle(color: Colors.white70, fontSize: 16)),
+                    ),
                     MenuItem(
                       text: 'Home',
                       icon: Icons.home_outlined,
                       onClicked: () => selectedItem(context, 0),
-                    ),
-                    const SizedBox(height: 5),
-                    MenuItem(
-                      text: 'Join Group',
-                      icon: Icons.person_add_alt_1_outlined,
-                      onClicked: () => selectedItem(context, 1),
                     ),
                     
                     const SizedBox(height: 5),
                     MenuItem(
                       text: 'Pending Sessions',
                       icon: Icons.timer_outlined,
-                      onClicked: () => selectedItem(context, 2),
+                      onClicked: () => selectedItem(context, 1),
                     ),
                     const SizedBox(height: 5),
                     MenuItem(
                       text: 'Schedule Tutor',
                       icon: Icons.add_outlined,
-                      onClicked: () => selectedItem(context, 3),
+                      onClicked: () => selectedItem(context, 2),
                     ),
                     const SizedBox(height: 8),
                     Divider(color: Colors.white70),
@@ -55,12 +53,12 @@ class DrawerFb1 extends StatelessWidget {
                     MenuItem(
                       text: 'View Profile',
                       icon: Icons.person_3_outlined,
-                      onClicked: () => selectedItem(context, 4),
+                      onClicked: () => selectedItem(context, 3),
                     ),
                     MenuItem(
                       text: 'Log Out',
                       icon: Icons.logout_outlined,
-                      onClicked: () => selectedItem(context, 5),
+                      onClicked: () => selectedItem(context, 4),
                     ),
                   ],
                 ),
@@ -83,25 +81,20 @@ class DrawerFb1 extends StatelessWidget {
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => JoinGroup(uid: FirebaseAuth.instance.currentUser!.uid,), // Page 2
+          builder: (context) => PendingSessions(groupID: groupID,),
         ));
         break;
       case 2:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => PendingSessions(),
+          builder: (context) => RequestTutorOtherInfo(groupID: groupID,), // Page 4
         ));
         break;
       case 3:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => RequestTutor(), // Page 4
-        ));
-        break;
-      case 4:
-        Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => StudentProfile(), // Page 4
         ));
         break;
-      case 5:
+      case 4:
         await FirebaseAuth.instance.signOut(); 
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Welcome()));
         break;

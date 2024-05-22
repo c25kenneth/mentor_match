@@ -25,25 +25,28 @@ class _WelcomeState extends State<Welcome> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              width: width * 0.75,
+              height: height * 0.40,
+              child: SvgPicture.asset(
+                assetName,
+              ),
+            ),
             Text("Mentor Match", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),),
             Text("Schedule Your Academic Success", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),),
-            
-            Container(
-              width: width * 0.75,
-              height: height * 0.45,
-              child: SvgPicture.asset(
-              assetName,
-            ),
-            ),
             SizedBox(height: 25),
             Container(
-              width: width * 0.75,
+              width: width * 0.85,
               child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignInStudent()));                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Color.fromRGBO(108, 99, 255, 1),
+                    shape: RoundedRectangleBorder(
+                        // Change your radius here
+                        borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   child: const Padding(
                     padding:
@@ -54,7 +57,7 @@ class _WelcomeState extends State<Welcome> {
             ),
               SizedBox(height: 15.0), 
               Container(
-                width: width * 0.75,
+                width: width * 0.85,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpStudent()));
@@ -62,6 +65,10 @@ class _WelcomeState extends State<Welcome> {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        // Change your radius here
+                        borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   child: const Padding(
                     padding:

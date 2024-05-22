@@ -2,14 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_match/LoadingScreen.dart';
-import 'package:mentor_match/components/InputInfoField.dart';
-import 'package:mentor_match/components/TopBar.dart';
-import 'package:mentor_match/components/TopBar2.dart';
-import 'package:mentor_match/components/TutorSessionCard.dart';
+import 'package:mentor_match/components/TutorSessionPendingCard.dart';
 
 
 class PendingSessions extends StatefulWidget {
-  const PendingSessions({super.key});
+  final String groupID; 
+  const PendingSessions({super.key, required this.groupID});
 
   @override
   State<PendingSessions> createState() => _PendingSessionsState();
@@ -17,11 +15,12 @@ class PendingSessions extends StatefulWidget {
 
 class _PendingSessionsState extends State<PendingSessions> {
   TextEditingController _controller = TextEditingController(); 
-  
+  String currUserUID = FirebaseAuth.instance.currentUser!.uid;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).collection("pending_requests").snapshots(),
+      stream: FirebaseFirestore.instance.collection("groups").doc(widget.groupID).collection("tutor_requests").where("pending", isEqualTo: "true").where("submitterID", isEqualTo: currUserUID).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
@@ -41,27 +40,17 @@ class _PendingSessionsState extends State<PendingSessions> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  // SafeArea(
-                  //   child: Align(
-                  //     alignment: Alignment.topLeft,
-                  //     child: Container(
-                  //       padding: EdgeInsets.fromLTRB(9, 0, 0, 0),
-                  //       margin: EdgeInsets.fromLTRB(15, 0, 0, 0), 
-                  //       child: TopBarFb1(title: "All Sessions",)
-                  //     ),
-                  //   ),
-                  // ),
+
                   ListView.builder(
                     itemCount: snapshot.data!.docs.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return TutorSessionCard(
+                      return TutorSessionPendingCard(
                         date: snapshot.data!.docs[index]["submitterAvailability"], 
                         subject: snapshot.data!.docs[index]["subject"], 
                         description: snapshot.data!.docs[index]["description"],
-                        requestID: snapshot.data!.docs[index]["groupSessionReference"], 
+                        requestID: snapshot.data!.docs[index].id,
                         groupID: snapshot.data!.docs[index]["groupID"], 
-                        requestIdUser: snapshot.data!.docs[index].id, 
                         submitterID: snapshot.data!.docs[index]["submitterID"]);
                     },
                   ),

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_match/home_pages/student/TutorSessionsGroup.dart';
+import 'package:mentor_match/home_pages/admin/GroupHome.dart';
 
-class GroupCard extends StatefulWidget {
+class GroupCardAdmin extends StatefulWidget {
   final String title; 
   final String subtitle; 
   final String groupID; 
-  const GroupCard({super.key, required this.title, required this.subtitle, required this.groupID});
+  const GroupCardAdmin({super.key, required this.title, required this.subtitle, required this.groupID});
 
   @override
-  State<GroupCard> createState() => _GroupCardState();
+  State<GroupCardAdmin> createState() => _GroupCardAdminState();
 }
 
-class _GroupCardState extends State<GroupCard> {
+class _GroupCardAdminState extends State<GroupCardAdmin> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -26,7 +26,7 @@ class _GroupCardState extends State<GroupCard> {
             decoration: BoxDecoration(color: Color.fromARGB(200, 165, 55, 253), borderRadius: BorderRadius.circular(27),),
             child: ListTile(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => TutorSessionsGroup(groupID: widget.groupID,)));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => GroupHome(title: widget.title, groupID: widget.groupID)));
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(27)

@@ -28,7 +28,7 @@ class _RequestTutorOtherInfoState extends State<RequestTutorOtherInfo> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width; 
     return StreamBuilder(
-      stream: _db.collection("users").doc(_auth.currentUser!.uid).collection("groups").doc(widget.groupID).snapshots(),
+      stream: _db.collection("groups").doc(widget.groupID).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return StreamBuilder(
@@ -72,8 +72,12 @@ class _RequestTutorOtherInfoState extends State<RequestTutorOtherInfo> {
                               Container(
                                 width: screenWidth * 0.8,
                                 child: MultiSelectDropDown(
+                                  searchEnabled: true,
+                                  searchLabel: "Search by subject name",
                                   controller: _controllerSubject,
-                                  onOptionSelected: (List<ValueItem> selectedOptions) {},
+                                  onOptionSelected: (List<ValueItem> selectedOptions) {
+                                    
+                                  },
                                   options: (snapshot.data!["available_subjects"] as List<dynamic>).map((e) {
                                     return ValueItem(label: e, value: e);
                                   }).toList(),
@@ -95,6 +99,8 @@ class _RequestTutorOtherInfoState extends State<RequestTutorOtherInfo> {
                               Container(
                                 width: screenWidth * 0.8,
                                 child: MultiSelectDropDown(
+                                  searchEnabled: true,
+                                  searchLabel: "Search",
                                   controller: _controllerAvailability,
                                   onOptionSelected: (List<ValueItem> selectedOptions) {},
                                   options: (snapshot.data!["times_available"] as List<dynamic>).map((e) {

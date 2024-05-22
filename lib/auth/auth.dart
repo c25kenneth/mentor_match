@@ -73,8 +73,7 @@ dynamic signInStudent(String emailAddress, String password) async {
 
 dynamic addStudentInfo(String uid, String grade, String email, String name) async {
   try {
-    List<String> groupsInitial = [];
-    await FirebaseFirestore.instance.collection("users").doc(uid).set({'uid': uid, 'role': "student", "grade": grade, "groups": groupsInitial, "email": email, "name": name});
+    await FirebaseFirestore.instance.collection("users").doc(uid).set({'uid': uid, 'role': "student", "grade": grade, "groupID": "", "email": email, "name": name});
   } catch(e) {
     print(e); 
     return "Error creating account. Please try again"; 

@@ -43,23 +43,20 @@ class _SignUpStudentState extends State<SignUpStudent> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("Get Started", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                  Text("Create an Account to get started", style: TextStyle(fontSize: 16, color: Colors.grey[600]),),
-                  SizedBox(height: 25),
-                  Center(
-                    child: Column(
+        body: Center(
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.all(screenWidth * 0.075),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Get Started", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
+                    Text("Create an Account to get started", style: TextStyle(fontSize: 18, color: Colors.grey[600]),),
+                    Column(
                     children: [
-                        Container(width: screenWidth * 0.4, height: screenHeight * 0.2, child: SvgPicture.asset("assets/images/undraw_undraw_sign_up_ln1s_-1-_ofs1.svg", )), 
-                        SizedBox(height: 15),
+                        SizedBox(height: 25),
                         Container(
-                          width: screenWidth * 0.8,
                           child: TextField(
                             onChanged: (val) {
                               _textEditingControllerEmail.text = val; 
@@ -83,7 +80,6 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         ),
                         SizedBox(height: 25),
                         Container(
-                          width: screenWidth * 0.8,
                           child: TextField(
                             onChanged: (value) {
                               _textEditingControllerPassword.text = value; 
@@ -121,7 +117,6 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         errorMessage == "" ? Container() : Text(errorMessage, style: TextStyle(color: Colors.red, fontWeight: FontWeight.w400, fontSize: 15),),
                         SizedBox(height: 30),
                         Container(
-                          width: screenWidth * 0.8,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(30),
@@ -181,9 +176,9 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         ),
                       ],
                     ),
-                  ),
-                  Container(
-                    width: screenWidth * 0.8, child: GoogleBtn1(onPressed: () async {
+                                    ),
+                                    Container( 
+                    child: GoogleBtn1(onPressed: () async {
                     dynamic result = await signInWithGoogle();
                     print(result);
                     if (result.runtimeType == String) {
@@ -203,9 +198,9 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         });
                       }
                     }
-                  })),
-                  SizedBox(height: 15),
-                  RichText(
+                                    })),
+                                    SizedBox(height: 15),
+                                    RichText(
                     text: TextSpan(children: [
                       TextSpan(
                         text: "Already have an account? ",
@@ -219,12 +214,12 @@ class _SignUpStudentState extends State<SignUpStudent> {
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignInStudent()));
                             }),
                     ]),
-                  ),
+                                    ),
                                 ],),
                     ],
                                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

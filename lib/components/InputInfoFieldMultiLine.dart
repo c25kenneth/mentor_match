@@ -27,9 +27,9 @@ class _InfoInputFieldMultiLineFb1State extends State<InfoInputFieldMultiLineFb1>
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
-                color: Colors.white.withOpacity(.9)),
+                color: Colors.black),
           ),
-          
+          SizedBox(height: 8),
           Container(
             height: 100, // Adjust this height to support more lines
             decoration: BoxDecoration(boxShadow: [
