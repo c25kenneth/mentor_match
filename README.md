@@ -1,16 +1,11 @@
-# mentor_match
+# Mentor Match
 
-A new Flutter project.
+Mobile app to connect in-school tutors with students. Students can request and schedule tutoring sessions. Developed admin and client side of the app. Teachers can moderate all student activity on the app with their own version
 
-## Getting Started
+## Built With
+- Flutter/Dart
+- Firebase (Auth + Firestore)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+![Simulator Screenshot - iPhone 15 Pro - 2024-08-28 at 14 13 25](https://github.com/user-attachments/assets/f5fc055c-0932-4d8a-9671-ecbe96b5ddb9)
+![Simulator Screenshot - iPhone 15 Pro - 2024-08-28 at 14 14 24](https://github.com/user-attachments/assets/9303ac4f-2859-4425-a238-143e7c368ab4)
