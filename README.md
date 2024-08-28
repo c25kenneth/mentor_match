@@ -7,7 +7,7 @@ Mobile app to connect in-school tutors with students. Students can request and s
 - Firebase (Auth + Firestore)
 
 ## Screenshots
-<p align="center">
+<p align="left">
   <img src="https://github.com/user-attachments/assets/f5fc055c-0932-4d8a-9671-ecbe96b5ddb9" alt="Screenshot 1" width="200"/>
   <img src="https://github.com/user-attachments/assets/9303ac4f-2859-4425-a238-143e7c368ab4" alt="Screenshot 2" width="200"/>
   <img src="https://github.com/user-attachments/assets/3c499301-6b2a-4b89-bc65-5eeb19d1a8a6" alt="Screenshot 3" width="200"/>
